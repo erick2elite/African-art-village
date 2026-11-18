@@ -1236,6 +1236,7 @@ select:focus-visible {
 
 .social-links {
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
 }
 
