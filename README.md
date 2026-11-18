@@ -1,24 +1,23 @@
-# THE ART VILLAGE — Sustainable Creative Academy
+# AFRICAN ART VILLAGE — Sustainable Creative Academy
 
-> **"Nothing is wasted when imagination is given the opportunity to create."**
+> **“Nothing is wasted when imagination is given the opportunity to create.”**
 
-A mobile-first, high-performance, editorial landing page designed for **THE ART VILLAGE**, an eco-conscious creative academy connecting craft, heritage, circular materials, and architectural innovation.
+A mobile-first, high-performance, editorial landing page designed for **AFRICAN ART VILLAGE**, an eco-conscious creative academy in East Africa connecting craft, heritage, circular materials, and architectural innovation.
 
 ---
 
 ## Quick Start & Local Preview
 
-You can open the project in any modern web browser immediately:
+You can open the project in any modern web browser:
 
 1. **Direct File Preview**:
-   Double-click `index.html` in this folder or open it with your preferred browser:
+   Double-click `index.html` or open it with your browser:
    ```bash
    xdg-open index.html
    ```
 
 2. **Local HTTP Server (Recommended for responsive testing & WebP serving)**:
    ```bash
-   cd "African art village"
    python3 -m http.server 8000
    ```
    Then open `http://localhost:8000` in your browser.
@@ -29,29 +28,25 @@ You can open the project in any modern web browser immediately:
 
 ```
 African art village/
-├── index.html                     # Complete, self-contained landing page with integrated styles & scripts
-├── styles.css                     # External stylesheet (modular version)
-├── app.js                         # External script file (modal, forms, smooth scroll)
+├── index.html                     # Complete, self-contained landing page with responsive image architecture
+├── styles.css                     # Modular stylesheet
+├── app.js                         # Interactive behaviors (accordion, drawer, forms)
 ├── vision-document.html           # Long-form artistic vision & academy charter
 ├── README.md                      # Project documentation and quick reference
-├── images/                        # Polished, responsive image system (WebP + JPEG fallbacks)
-│   ├── hero-sculpture-desktop.webp / .jpg    (1920×1080)
-│   ├── hero-sculpture-desktop-1080.webp / .jpg (1080×608)
-│   ├── hero-sculpture-mobile.webp / .jpg     (1080×1350, 4:5 vertical)
-│   ├── pillar-01-fine-arts.webp / .jpg       (640×640, 1:1 macro)
-│   ├── pillar-02-recycling.webp / .jpg       (640×640, 1:1 macro)
-│   ├── pillar-03-fabrication.webp / .jpg     (640×640, 1:1 macro)
-│   ├── pillar-04-digital.webp / .jpg         (640×640, 1:1 macro)
-│   ├── pillar-05-enterprise.webp / .jpg      (640×640, 1:1 macro)
-│   ├── pillar-06-heritage.webp / .jpg        (640×640, 1:1 macro)
-│   ├── ecosystem-workshop-build-1200.webp / .jpg (1200×800, 3:2 landscape)
-│   ├── ecosystem-workshop-build-640.webp / .jpg  (640×427)
-│   ├── pre-cta-atmospheric-wide-1920.webp / .jpg (1920×1080, 16:9 landscape)
-│   └── pre-cta-atmospheric-wide-1080.webp / .jpg (1080×608)
-├── original-photography/          # Source site photography
-│   └── site-monumental-stone-wall.jpg
-└── documentation/                 # Full creative & brand specifications
-    └── BRAND-AND-DESIGN-SPEC.md
+└── images/                        # Polished, responsive image system (WebP + JPEG fallbacks)
+    ├── hero-sculpture-desktop.webp / .jpg      (1920×1080)
+    ├── hero-sculpture-desktop-1080.webp / .jpg (1080×608)
+    ├── hero-sculpture-mobile.webp / .jpg       (1080×1350, 4:5 vertical)
+    ├── pillar-01-fine-arts.webp / .jpg         (640×640, 1:1 macro)
+    ├── pillar-02-recycling.webp / .jpg         (640×640, 1:1 macro)
+    ├── pillar-03-fabrication.webp / .jpg       (640×640, 1:1 macro)
+    ├── pillar-04-digital.webp / .jpg           (640×640, 1:1 macro)
+    ├── pillar-05-enterprise.webp / .jpg        (640×640, 1:1 macro)
+    ├── pillar-06-heritage.webp / .jpg          (640×640, 1:1 macro)
+    ├── ecosystem-workshop-build-1200.webp / .jpg (1200×800, 3:2 landscape)
+    ├── ecosystem-workshop-build-640.webp / .jpg  (640×427)
+    ├── pre-cta-atmospheric-wide-1920.webp / .jpg (1920×1080, 16:9 landscape)
+    └── pre-cta-atmospheric-wide-1080.webp / .jpg (1080×608)
 ```
 
 ---
@@ -66,26 +61,12 @@ African art village/
 - **Light Neutral / Gallery Off-White**: `#F5F0E8` — Natural cotton, linen, paper stock.
 - **Medium Neutral / Charcoal Border**: `#3A3A3A` — Architectural joinery lines, dividers, card outlines.
 
-### Editorial Typography
-- **Headings & Poster Display**: `Archivo` (font-weight 800/900, tight tracking `-0.03em`)
-- **Body & Manifesto Pull Quotes**: `Fraunces` / `Lora` (warm humanistic editorial serif with soft italics)
-- **Technical Badges & Meta Data**: `Space Mono` / `Courier Prime` (clean monospace)
-
 ---
 
-## Photo System & Grading Pipeline
+## Contact & Directorate
 
-All images have undergone fine-art color grading and architectural dehazing:
-- **Tone Curve**: De-hazed shadow floor aligned with `#1A1A1A`, preserving deep chisel shadows without crushed blacks.
-- **Color Temperature**: Subtle warmth injected into mid-tones (`#C96A4B` terracotta) and highlights (`#E3B448` warm sunlight) to eliminate raw overcast camera haze.
-- **Dual-Pass Unsharp Mask**: Micro-contrast optimized for tactile masonry, rough-hewn stone strata, and timber joins.
-- **Zero Layout Shift**: Explicit `aspect-ratio` defined on all photo containers with graceful fallback labels.
-
----
-
-## Contact & Social Presence
-
-- **Project Lead / Contact**: Patrick Kinuthia
+- **Founder & Creative Director**: Patrick Kinuthia
+- **WhatsApp**: [+254 722 559327](https://wa.me/254722559327)
 - **Email**: [patrickkinuthia712@gmail.com](mailto:patrickkinuthia712@gmail.com)
-- **Instagram**: [@babaritah](https://www.instagram.com/babaritah)
+- **Instagram**: [@babaritah](https://www.instagram.com/babaritah/)
 - **TikTok**: [@patrickkinuthia](https://www.tiktok.com/@patrickkinuthia)
