@@ -1,0 +1,2125 @@
+<!--
+================================================================================
+THE ART VILLAGE — OFFLINE PHOTOGRAPHY SHOOTING BRIEF & IMAGE SLOT REGISTRY
+================================================================================
+Instructions for the artist and photographer:
+Every image slot below is mapped to code with zero layout shift (CLS: 0).
+Follow the specific framing, focal points, and lighting directions below.
+
+SLOT 01: HERO BACKGROUND
+- Code Slot: .hero-photo-layer
+- Aspect Ratio: 4:5 vertical (mobile) / 16:9 landscape (desktop)
+- Target Dimensions: 1080×1350 (mobile) / 1920×1080 (desktop)
+- Crop & Focal Point: Cover, focal point 50% 40% (centered slightly high)
+- Lighting & Tone: Raking natural light, dark background (wall, doorway, shaded yard).
+- Subject: Artist's strongest finished sculpture/assemblage. Dark enough for white text.
+- Fallback: Gracefully displays [ PHOTO PENDING — HERO ] on #3A3A3A with #C96A4B hairline border.
+- Files: images/hero-sculpture-mobile.webp, images/hero-sculpture-desktop.webp (with JPG fallbacks)
+
+SLOT 02: PHILOSOPHY SECTION
+- Status: TYPE-ONLY. No image. Preserves textual weight and manifesto focus.
+
+SLOT 03: SIX PILLAR DETAIL SQUARES
+- Code Slot: .pillar-photo-slot within each of the 6 pillar cards
+- Aspect Ratio: 1:1 square
+- Target Dimensions: 640×640
+- Crop & Focal Point: Cover, focal point centre
+- Composition: Macro close-up (~30cm). Focus on hands working or material texture.
+  No direct-to-camera smiling portraits.
+  • Pillar 01 (Fine Arts): images/pillar-01-fine-arts.webp — Finished canvas or sculpture detail in raking light.
+  • Pillar 02 (Recycling): images/pillar-02-recycling.webp — Hands sorting/cutting discarded material; raw material pile.
+  • Pillar 03 (Fabrication): images/pillar-03-fabrication.webp — Tools in use on timber or metal; sawdust; join mid-cut.
+  • Pillar 04 (Digital): images/pillar-04-digital.webp — Screen glow on hands, or 3D print mid-layer.
+  • Pillar 05 (Enterprise): images/pillar-05-enterprise.webp — Products arranged as market stall; price tag; wrapped parcel.
+  • Pillar 06 (Heritage): images/pillar-06-heritage.webp — Traditional Imigongo relief, textile weave, elder's hands with youth.
+- Fallbacks: [ PHOTO PENDING — PILLAR 01 ] through [ PHOTO PENDING — PILLAR 06 ]
+
+SLOT 04: LIVING ECOSYSTEM WIDE SHOT
+- Code Slot: .ecosystem-photo-slot
+- Aspect Ratio: 3:2 landscape
+- Target Dimensions: 1200×800
+- Crop: Cover
+- Subject: Wide shot of real build/workshop/garden (rammed stone, scaffolding, earth walls).
+- Active Image: images/ecosystem-workshop-build-1200.webp (Real stone & earth construction on site)
+- Fallback: [ PHOTO PENDING — ECOSYSTEM ]
+
+SLOT 05: PRE-CTA ATMOSPHERIC BAND
+- Code Slot: .pre-cta-photo-slot
+- Aspect Ratio: 16:9 landscape
+- Target Dimensions: 1920×1080
+- Crop: Cover, darkened 60% with rgba(26,26,26,0.60) overlay
+- Subject: Single atmospheric wide shot across outdoor grounds, evening light, no faces.
+- Active Image: images/pre-cta-atmospheric-wide-1920.webp
+- Fallback: [ PHOTO PENDING — PRE-CTA ATMOSPHERE ]
+
+SLOT 06: FOOTER
+- Status: TYPE-ONLY. No image.
+================================================================================
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Art Village | A Sustainable Creative Academy</title>
+  <meta name="description" content="A vision for creativity, environmental transformation, and youth empowerment. Discover The Art Village — and become part of the movement.">
+  <meta name="theme-color" content="#1A1A1A">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       DESIGN TOKENS & RESET — THE ART VILLAGE
+       ========================================================================== */
+    :root {
+      --base: #1A1A1A;
+      --surface: #222222;
+      --border: #3A3A3A;
+      --terracotta: #C96A4B;
+      --teal: #2E6F6A;
+      --gold: #E3B448;
+      --offwhite: #F5F0E8;
+      --muted: #8E8880;
+
+      --font-display: 'Space Grotesk', -apple-system, sans-serif;
+      --font-serif: 'Fraunces', Georgia, serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+      background: var(--base);
+      color: var(--offwhite);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      line-height: 1.65;
+      background: var(--base);
+      color: var(--offwhite);
+      overflow-x: hidden;
+    }
+
+    @media (min-width: 768px) {
+      body {
+        font-size: 1.125rem;
+      }
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: inherit;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    @media (min-width: 768px) {
+      .container {
+        padding: 0 2.5rem;
+      }
+    }
+
+    /* ==========================================================================
+       PHOTO SYSTEM & CONTROLLED IMAGE SLOTS
+       ========================================================================== */
+    .photo-slot {
+      position: relative;
+      background-color: var(--border);
+      border: 1px solid var(--terracotta);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+    }
+
+    .photo-slot-label {
+      font-family: var(--font-serif);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--offwhite);
+      padding: 1rem;
+      text-align: center;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .photo-slot picture,
+    .photo-slot img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 2;
+      display: block;
+    }
+
+    /* Slot 01: Hero Background */
+    .hero-photo-layer {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      background-color: var(--base);
+      overflow: hidden;
+      border: none;
+    }
+
+    .hero-photo-layer img {
+      object-position: 50% 40%;
+    }
+
+    .hero-gradient-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      background: linear-gradient(to top, rgba(26, 26, 26, 0.75) 0%, rgba(26, 26, 26, 0.35) 100%);
+      pointer-events: none;
+    }
+
+    /* Slot 03: Six Pillar Square Details (1:1) */
+    .pillar-photo-slot {
+      aspect-ratio: 1 / 1;
+      width: 100%;
+      margin-bottom: 1.5rem;
+    }
+
+    .pillar-photo-slot img {
+      object-position: center;
+    }
+
+    /* Slot 04: Living Ecosystem Wide Shot (3:2) */
+    .ecosystem-photo-slot {
+      aspect-ratio: 3 / 2;
+      width: 100%;
+      margin-bottom: 3rem;
+    }
+
+    /* Slot 05: Pre-CTA Atmospheric Band (16:9) */
+    .pre-cta-section {
+      width: 100%;
+      border-bottom: 1px solid var(--border);
+      background-color: var(--base);
+    }
+
+    .pre-cta-slot {
+      aspect-ratio: 16 / 9;
+      width: 100%;
+      max-height: 480px;
+      border-left: none;
+      border-right: none;
+    }
+
+    .pre-cta-dark-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(26, 26, 26, 0.60);
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    /* ==========================================================================
+       TOP MASTHEAD (Flat, No Blur, No Shadows)
+       ========================================================================== */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--base);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .brand-mark {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+    }
+
+    .brand-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: var(--offwhite);
+    }
+
+    .brand-sub {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      color: var(--terracotta);
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      display: none;
+    }
+
+    @media (min-width: 640px) {
+      .brand-sub {
+        display: inline;
+      }
+    }
+
+    .header-action {
+      font-family: var(--font-display);
+      font-size: 0.8125rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: var(--base);
+      background: var(--gold);
+      padding: 0.65rem 1.1rem;
+      transition: background 160ms ease-out;
+    }
+
+    .header-action:hover {
+      background: #ecd070;
+    }
+
+    /* ==========================================================================
+       HERO (Poster Scale, Left-Aligned, Legible Over Dark Image)
+       ========================================================================== */
+    .hero-section {
+      position: relative;
+      padding: 4.5rem 0 3.5rem;
+      border-bottom: 1px solid var(--border);
+      background: var(--base);
+      overflow: hidden;
+    }
+
+    @media (min-width: 768px) {
+      .hero-section {
+        padding: 7rem 0 5rem;
+      }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 5;
+    }
+
+    .hero-kicker {
+      font-family: var(--font-display);
+      font-size: 0.8125rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--terracotta);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-headline {
+      font-family: var(--font-display);
+      font-size: clamp(3.25rem, 11vw, 7.5rem);
+      font-weight: 700;
+      line-height: 0.92;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      color: var(--offwhite);
+      margin-bottom: 1.75rem;
+      max-width: 14ch;
+    }
+
+    .hero-subheadline {
+      font-family: var(--font-display);
+      font-size: clamp(1.2rem, 3vw, 1.75rem);
+      font-weight: 500;
+      color: var(--teal);
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-manifesto {
+      font-family: var(--font-serif);
+      font-size: clamp(1.25rem, 2.5vw, 1.65rem);
+      font-style: italic;
+      line-height: 1.45;
+      color: var(--offwhite);
+      max-width: 38ch;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 3.5rem;
+    }
+
+    @media (min-width: 480px) {
+      .hero-actions {
+        flex-direction: row;
+        align-items: center;
+      }
+    }
+
+    .btn-primary {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-size: 0.9375rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      padding: 1.15rem 2rem;
+      background: var(--gold);
+      color: var(--base);
+      text-align: center;
+      transition: background 160ms ease-out;
+    }
+
+    .btn-primary:hover {
+      background: #ecd070;
+    }
+
+    .btn-secondary {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-size: 0.9375rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      padding: 1.15rem 2rem;
+      border: 1px solid var(--border);
+      color: var(--offwhite);
+      text-align: center;
+      background: rgba(26, 26, 26, 0.4);
+      transition: border-color 160ms ease-out, color 160ms ease-out;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--terracotta);
+      color: var(--terracotta);
+    }
+
+    /* Imigongo Architectural Border Block */
+    .hero-imigongo-band {
+      margin-top: 3rem;
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem;
+      position: relative;
+      z-index: 5;
+    }
+
+    .imigongo-svg-strip {
+      width: 100%;
+      height: 32px;
+      display: block;
+    }
+
+    .hero-trust {
+      font-family: var(--font-display);
+      font-size: 0.8125rem;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: var(--offwhite);
+      margin-top: 1.25rem;
+      line-height: 1.5;
+    }
+
+    .hero-trust strong {
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    /* ==========================================================================
+       PHILOSOPHY SECTION (Editorial Pull-Quote, Hairline Rules, Type-Only)
+       ========================================================================== */
+    .philosophy-section {
+      padding: 5rem 0;
+      border-bottom: 1px solid var(--border);
+      background: var(--base);
+    }
+
+    @media (min-width: 768px) {
+      .philosophy-section {
+        padding: 7rem 0;
+      }
+    }
+
+    .pullquote-wrapper {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 2.25rem 0;
+      margin-bottom: 2.5rem;
+    }
+
+    .pullquote-text {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.3;
+      color: var(--offwhite);
+      max-width: 32ch;
+    }
+
+    .philosophy-body {
+      font-family: var(--font-serif);
+      font-size: 1.125rem;
+      line-height: 1.7;
+      color: var(--offwhite);
+      max-width: 60ch;
+    }
+
+    /* ==========================================================================
+       THE SIX PILLARS (Asymmetric 12-Column Desktop Grid, 1:1 Photo Slots)
+       ========================================================================== */
+    .pillars-section {
+      padding: 5rem 0;
+      border-bottom: 1px solid var(--border);
+      background: var(--base);
+    }
+
+    @media (min-width: 768px) {
+      .pillars-section {
+        padding: 7rem 0;
+      }
+    }
+
+    .section-kicker {
+      font-family: var(--font-display);
+      font-size: 0.8125rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--terracotta);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4.5vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: var(--offwhite);
+      margin-bottom: 1.25rem;
+      max-width: 22ch;
+    }
+
+    .section-intro {
+      font-family: var(--font-serif);
+      font-size: 1.125rem;
+      line-height: 1.65;
+      color: var(--muted);
+      max-width: 60ch;
+      margin-bottom: 3.5rem;
+    }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 900px) {
+      .pillars-grid {
+        grid-template-columns: repeat(12, 1fr);
+      }
+      .pillar-col-7 { grid-column: span 7; }
+      .pillar-col-5 { grid-column: span 5; }
+      .pillar-col-6 { grid-column: span 6; }
+    }
+
+    .pillar-card {
+      border: 1px solid var(--border);
+      padding: 1.75rem;
+      background: var(--surface);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 240px;
+      transition: border-color 160ms ease-out;
+    }
+
+    .pillar-card:hover {
+      border-color: var(--gold);
+    }
+
+    .pillar-card[aria-expanded="true"] {
+      border-color: var(--terracotta);
+    }
+
+    .pillar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 1.25rem;
+    }
+
+    .pillar-num {
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: var(--gold);
+    }
+
+    .pillar-toggle {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      line-height: 1;
+      color: var(--muted);
+      transition: color 160ms ease-out, transform 160ms ease-out;
+    }
+
+    .pillar-card:hover .pillar-toggle,
+    .pillar-card[aria-expanded="true"] .pillar-toggle {
+      color: var(--offwhite);
+    }
+
+    .pillar-card[aria-expanded="true"] .pillar-toggle {
+      transform: rotate(45deg);
+    }
+
+    .pillar-title {
+      font-family: var(--font-display);
+      font-size: 1.375rem;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      color: var(--offwhite);
+      margin-bottom: 0.75rem;
+    }
+
+    .pillar-desc {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      line-height: 1.55;
+      color: var(--offwhite);
+      max-width: 55ch;
+    }
+
+    .pillar-detail {
+      display: none;
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      font-family: var(--font-serif);
+      font-size: 0.9375rem;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    .pillar-card[aria-expanded="true"] .pillar-detail {
+      display: block;
+    }
+
+    /* ==========================================================================
+       LIVING ECOSYSTEM (3:2 Wide Shot + 10 Facilities List)
+       ========================================================================== */
+    .ecosystem-section {
+      padding: 5rem 0;
+      border-bottom: 1px solid var(--border);
+      background: var(--base);
+    }
+
+    @media (min-width: 768px) {
+      .ecosystem-section {
+        padding: 7rem 0;
+      }
+    }
+
+    .arch-statement {
+      border-left: 2px solid var(--teal);
+      padding: 1rem 0 1rem 1.5rem;
+      margin-bottom: 2rem;
+      max-width: 60ch;
+    }
+
+    .arch-statement-text {
+      font-family: var(--font-serif);
+      font-size: 1.0625rem;
+      color: var(--offwhite);
+      line-height: 1.6;
+    }
+
+    .facilities-scroll {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 1.5rem;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) var(--base);
+    }
+
+    .facility-item {
+      flex: 0 0 280px;
+      scroll-snap-align: start;
+      border: 1px solid var(--border);
+      padding: 1.75rem;
+      background: var(--surface);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 200px;
+    }
+
+    @media (min-width: 768px) {
+      .facility-item {
+        flex: 0 0 320px;
+      }
+    }
+
+    .facility-num {
+      font-family: var(--font-display);
+      font-size: 0.8125rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: var(--terracotta);
+      margin-bottom: 1rem;
+    }
+
+    .facility-name {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--offwhite);
+      margin-bottom: 0.75rem;
+    }
+
+    .facility-desc {
+      font-family: var(--font-serif);
+      font-size: 0.9375rem;
+      line-height: 1.55;
+      color: var(--muted);
+    }
+
+    /* ==========================================================================
+       SOCIAL PROOF / VALIDATION STRIP
+       ========================================================================== */
+    .proof-section {
+      padding: 4.5rem 0;
+      border-bottom: 1px solid var(--border);
+      background: var(--base);
+    }
+
+    .proof-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .proof-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .proof-card {
+      border: 1px solid var(--border);
+      padding: 2rem;
+      background: var(--surface);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .proof-label {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--teal);
+      margin-bottom: 1.25rem;
+    }
+
+    .proof-quote {
+      font-family: var(--font-serif);
+      font-size: 1.0625rem;
+      line-height: 1.6;
+      color: var(--offwhite);
+    }
+
+    .proof-quote strong {
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* ==========================================================================
+       SLOT 05: PRE-CTA ATMOSPHERIC BAND (16:9 Landscape, 1920×1080, 60% Dark)
+       ========================================================================== */
+    .pre-cta-section {
+      width: 100%;
+      border-bottom: 1px solid var(--border);
+      background-color: var(--base);
+    }
+
+    .pre-cta-slot {
+      aspect-ratio: 16 / 9;
+      width: 100%;
+      max-height: 480px;
+      border-left: none;
+      border-right: none;
+    }
+
+    .pre-cta-dark-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(26, 26, 26, 0.60);
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    /* ==========================================================================
+       THE ASK / FINAL CTA (Poster Scale, Clear Declarative Verbs)
+       ========================================================================== */
+    .ask-section {
+      padding: 6rem 0;
+      border-bottom: 1px solid var(--border);
+      background: var(--base);
+    }
+
+    @media (min-width: 768px) {
+      .ask-section {
+        padding: 8rem 0;
+      }
+    }
+
+    .ask-headline {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 7vw, 4.75rem);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      color: var(--offwhite);
+      margin-bottom: 1.5rem;
+      max-width: 16ch;
+    }
+
+    .ask-subheadline {
+      font-family: var(--font-serif);
+      font-size: clamp(1.125rem, 2.5vw, 1.45rem);
+      line-height: 1.55;
+      color: var(--offwhite);
+      max-width: 52ch;
+      margin-bottom: 2.75rem;
+    }
+
+    .ask-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 520px;
+    }
+
+    @media (min-width: 540px) {
+      .ask-actions {
+        flex-direction: row;
+        align-items: center;
+      }
+    }
+
+    /* ==========================================================================
+       SLOT 06: FOOTER (TYPE-ONLY — NO IMAGE)
+       ========================================================================== */
+    .site-footer {
+      padding: 4.5rem 0 3.5rem;
+      background: var(--base);
+    }
+
+    .footer-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      margin-bottom: 3.5rem;
+    }
+
+    @media (min-width: 900px) {
+      .footer-layout {
+        grid-template-columns: 1.5fr 1.3fr 1fr;
+        align-items: start;
+      }
+    }
+
+    .footer-title {
+      font-family: var(--font-display);
+      font-size: 1.375rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--offwhite);
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-motto {
+      font-family: var(--font-display);
+      font-size: 0.8125rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-copy {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 50ch;
+    }
+
+    .footer-qr-panel {
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      background: var(--surface);
+      display: flex;
+      gap: 1.25rem;
+      align-items: center;
+    }
+
+    .qr-svg-box {
+      width: 72px;
+      height: 72px;
+      background: #FFFFFF;
+      padding: 4px;
+      flex-shrink: 0;
+    }
+
+    .qr-svg-box svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .qr-note-title {
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--offwhite);
+      margin-bottom: 0.25rem;
+    }
+
+    .qr-note-desc {
+      font-family: var(--font-serif);
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.4;
+      margin-bottom: 0.5rem;
+    }
+
+    .share-link-btn {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--gold);
+      border-bottom: 1px solid var(--gold);
+      padding-bottom: 1px;
+      display: inline-block;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    @media (min-width: 640px) {
+      .footer-bottom {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: baseline;
+      }
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      font-family: var(--font-display);
+      font-size: 0.8125rem;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--offwhite);
+    }
+
+    .footer-links a:hover {
+      color: var(--gold);
+    }
+
+    .footer-tag {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ==========================================================================
+       MODAL (Drawer with Plain Labels, Flat 1px Border)
+       ========================================================================== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 10, 10, 0.85);
+      z-index: 200;
+      display: none;
+      place-items: end center;
+    }
+
+    @media (min-width: 640px) {
+      .modal-overlay {
+        place-items: center;
+      }
+    }
+
+    .modal-overlay.active {
+      display: grid;
+    }
+
+    .modal-sheet {
+      width: 100%;
+      max-width: 560px;
+      max-height: 90vh;
+      overflow-y: auto;
+      background: var(--base);
+      border: 1px solid var(--border);
+      padding: 2.25rem 1.75rem;
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      line-height: 1;
+      color: var(--muted);
+    }
+
+    .modal-close:hover {
+      color: var(--offwhite);
+    }
+
+    .modal-kicker {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--terracotta);
+      margin-bottom: 0.5rem;
+    }
+
+    .modal-heading {
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      color: var(--offwhite);
+      margin-bottom: 1.5rem;
+    }
+
+    .form-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .field-label {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--muted);
+    }
+
+    .field-input,
+    .field-textarea {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 0.85rem 1rem;
+      font-family: var(--font-display);
+      font-size: 0.9375rem;
+      color: var(--offwhite);
+      border-radius: 0;
+    }
+
+    .field-input:focus,
+    .field-textarea:focus {
+      border-color: var(--gold);
+      outline: none;
+    }
+
+    .field-textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+
+    .options-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .option-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.5rem 0.85rem;
+      border: 1px solid var(--border);
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      color: var(--offwhite);
+      background: var(--surface);
+      transition: border-color 160ms ease-out, background 160ms ease-out;
+    }
+
+    .option-pill input {
+      display: none;
+    }
+
+    .option-pill:has(input:checked) {
+      border-color: var(--terracotta);
+      background: var(--terracotta);
+      color: #FFFFFF;
+    }
+
+    /* Modal Success State */
+    .modal-confirmed {
+      display: none;
+      padding: 1rem 0;
+    }
+
+    .modal-confirmed.active {
+      display: block;
+    }
+
+    .pass-card {
+      border: 1px solid var(--gold);
+      padding: 1.75rem;
+      background: var(--surface);
+      margin: 1.5rem 0;
+    }
+
+    .pass-id {
+      font-family: var(--font-display);
+      font-size: 0.8125rem;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .pass-name {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--offwhite);
+      margin-bottom: 0.25rem;
+    }
+
+    .pass-role {
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      color: var(--terracotta);
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .pass-manifesto {
+      font-family: var(--font-serif);
+      font-size: 0.9375rem;
+      font-style: italic;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* ==========================================================================
+       SLIM STICKY MOBILE ACTION BAR
+       ========================================================================== */
+    .mobile-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 90;
+      background: var(--base);
+      border-top: 1px solid var(--border);
+      padding: 0.75rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      transform: translateY(100%);
+      transition: transform 180ms ease-out;
+    }
+
+    .mobile-bar.active {
+      transform: translateY(0);
+    }
+
+    @media (min-width: 768px) {
+      .mobile-bar {
+        display: none !important;
+      }
+    }
+
+    .mobile-bar-btn {
+      flex: 1;
+      background: var(--gold);
+      color: var(--base);
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      padding: 0.85rem;
+      text-align: center;
+    }
+
+    /* Direct Contact & Founder Presentation */
+    .btn-whatsapp {
+      font-family: var(--font-display);
+      font-size: 0.8125rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 1.125rem 1.75rem;
+      background: transparent;
+      color: var(--teal);
+      border: 1px solid var(--teal);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .btn-whatsapp:hover {
+      background: var(--teal);
+      color: var(--offwhite);
+    }
+
+    .footer-contact-col {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .footer-contact-title {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .footer-contact-name {
+      font-family: var(--font-display);
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: var(--offwhite);
+    }
+
+    .footer-contact-role {
+      font-family: var(--font-serif);
+      font-size: 0.875rem;
+      color: var(--muted);
+      margin-top: -0.5rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .footer-contact-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      font-family: var(--font-serif);
+      font-size: 0.9375rem;
+    }
+
+    .footer-contact-list li {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+    }
+
+    .footer-contact-list a {
+      color: rgba(245, 240, 232, 0.9);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    .footer-contact-list a:hover {
+      color: var(--gold);
+    }
+
+    .contact-type {
+      font-family: var(--font-display);
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      width: 75px;
+      flex-shrink: 0;
+    }
+
+    .modal-direct-note {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      font-family: var(--font-serif);
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .modal-direct-note a {
+      color: var(--terracotta);
+      text-decoration: underline;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- =======================================================================
+       STICKY TOP MASTHEAD
+       ======================================================================= -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand-mark">
+        <a href="#hero" class="brand-title">The Art Village</a>
+        <span class="brand-sub">Kigali · Nairobi · Accra</span>
+      </div>
+      <button class="header-action" data-open-form>
+        Become Part of the Movement
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- =======================================================================
+         SLOT 01: HERO SECTION
+         4:5 Vertical on Mobile (1080×1350) / 16:9 Landscape on Desktop (1920×1080)
+         Cover, focal point 50% 40%, with linear gradient overlay.
+         ======================================================================= -->
+    <section class="hero-section" id="hero">
+      
+      <!-- Slot 01: Photo Layer with Graceful Placeholder Fallback -->
+      <div class="photo-slot hero-photo-layer">
+        <span class="photo-slot-label">[ PHOTO PENDING — HERO ]</span>
+        <picture>
+          <!-- Mobile Crop: 4:5 vertical -->
+          <source media="(max-width: 767px)" type="image/webp" srcset="images/hero-sculpture-mobile.webp 1080w">
+          <source media="(max-width: 767px)" type="image/jpeg" srcset="images/hero-sculpture-mobile.jpg 1080w">
+          <!-- Desktop Crop: 16:9 landscape -->
+          <source media="(min-width: 768px)" type="image/webp" srcset="images/hero-sculpture-desktop.webp 1920w, images/hero-sculpture-desktop-1080.webp 1080w">
+          <source media="(min-width: 768px)" type="image/jpeg" srcset="images/hero-sculpture-desktop.jpg 1920w, images/hero-sculpture-desktop-1080.jpg 1080w">
+          <img src="images/hero-sculpture-desktop.jpg"
+               alt="Hand-carved stone architectural relief wall under construction in raking natural light"
+               loading="eager"
+               fetchpriority="high"
+               decoding="async"
+               onerror="this.style.display='none';">
+        </picture>
+        <div class="hero-gradient-overlay" aria-hidden="true"></div>
+      </div>
+
+      <div class="container hero-content">
+        <div class="hero-kicker">A Sustainable Creative Academy</div>
+        
+        <h1 class="hero-headline">The Art Village</h1>
+        
+        <div class="hero-subheadline">
+          Where creativity meets sustainability, and young people become architects of change.
+        </div>
+
+        <p class="hero-manifesto">
+          “Nothing is wasted when imagination is given the opportunity to create.”
+        </p>
+
+        <div class="hero-actions">
+          <a href="#pillars" class="btn-primary">
+            Enter the Vision
+          </a>
+          <button class="btn-secondary" data-open-form>
+            Become Part of the Movement
+          </button>
+        </div>
+
+        <!-- Single Real Imigongo Mathematical Geometric Pattern Strip -->
+        <div class="hero-imigongo-band">
+          <svg class="imigongo-svg-strip" viewBox="0 0 1200 32" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="imigongoGrid" width="48" height="32" patternUnits="userSpaceOnUse">
+                <path d="M0,16 L24,0 L48,16 L24,32 Z" fill="none" stroke="#3A3A3A" stroke-width="1.2"/>
+                <path d="M12,16 L24,8 L36,16 L24,24 Z" fill="none" stroke="#C96A4B" stroke-width="1"/>
+                <line x1="0" y1="16" x2="48" y2="16" stroke="#3A3A3A" stroke-width="0.8"/>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#imigongoGrid)"/>
+          </svg>
+
+          <p class="hero-trust">
+            Inspired by the work of <strong>Komera Leadership Center</strong>, <strong>Ocean Sole</strong>, and the <strong>Accra Arts District</strong>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         SLOT 02: PHILOSOPHY SECTION (TYPE-ONLY — NO IMAGE)
+         ======================================================================= -->
+    <section class="philosophy-section" id="philosophy">
+      <div class="container">
+        
+        <div class="pullquote-wrapper">
+          <blockquote class="pullquote-text">
+            “Nothing is wasted when imagination is given the opportunity to create.”
+          </blockquote>
+        </div>
+
+        <p class="philosophy-body">
+          Discarded materials, traditional knowledge, and young imagination are the raw materials of a new economy. We build workshops where scrap becomes sculpture and talent becomes a livelihood.
+        </p>
+
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         SLOT 03: THE SIX PILLARS (1:1 Square Photo Slots, 640×640, Centered Crop)
+         ======================================================================= -->
+    <section class="pillars-section" id="pillars">
+      <div class="container">
+        
+        <div class="section-kicker">Curriculum &amp; Production</div>
+        <h2 class="section-title">The Six Pillars</h2>
+        <p class="section-intro">
+          Tap any pillar to view its curriculum and workshop structure.
+        </p>
+
+        <div class="pillars-grid">
+
+          <!-- Pillar 1 (Span 7) -->
+          <article class="pillar-card pillar-col-7" tabindex="0" role="button" aria-expanded="false">
+            <div>
+              <div class="photo-slot pillar-photo-slot">
+                <span class="photo-slot-label">[ PHOTO PENDING — PILLAR 01 ]</span>
+                <picture>
+                  <source type="image/webp" srcset="images/pillar-01-fine-arts.webp 640w">
+                  <source type="image/jpeg" srcset="images/pillar-01-fine-arts.jpg 640w">
+                  <img src="images/pillar-01-fine-arts.jpg"
+                       alt="Tiered hand-carved natural stone rock fountain sculpture detail in daylight"
+                       loading="lazy"
+                       decoding="async"
+                       onerror="this.style.display='none';">
+                </picture>
+              </div>
+
+              <div class="pillar-header">
+                <span class="pillar-num">01</span>
+                <span class="pillar-toggle">+</span>
+              </div>
+              <h3 class="pillar-title">Fine Arts &amp; Creative Expression</h3>
+              <p class="pillar-desc">
+                Painters, sculptors, and photographers build portfolios for international exhibitions from Nairobi to Paris.
+              </p>
+            </div>
+            <div class="pillar-detail">
+              Students work in shared studios with visiting curators from the Accra Arts District.
+            </div>
+          </article>
+
+          <!-- Pillar 2 (Span 5) -->
+          <article class="pillar-card pillar-col-5" tabindex="0" role="button" aria-expanded="false">
+            <div>
+              <div class="photo-slot pillar-photo-slot">
+                <span class="photo-slot-label">[ PHOTO PENDING — PILLAR 02 ]</span>
+                <picture>
+                  <source type="image/webp" srcset="images/pillar-02-recycling.webp 640w">
+                  <source type="image/jpeg" srcset="images/pillar-02-recycling.jpg 640w">
+                  <img src="images/pillar-02-recycling.jpg"
+                       alt="Masons hoisting and placing raw cut quarry limestone blocks onto wall"
+                       loading="lazy"
+                       decoding="async"
+                       onerror="this.style.display='none';">
+                </picture>
+              </div>
+
+              <div class="pillar-header">
+                <span class="pillar-num">02</span>
+                <span class="pillar-toggle">+</span>
+              </div>
+              <h3 class="pillar-title">Recycling &amp; Environmental Art</h3>
+              <p class="pillar-desc">
+                Ocean plastics and scrap metal become large-scale public sculptures on the Ocean Sole model.
+              </p>
+            </div>
+            <div class="pillar-detail">
+              Ten tonnes of municipal refuse are sorted weekly into raw material for sculpture.
+            </div>
+          </article>
+
+          <!-- Pillar 3 (Span 5) -->
+          <article class="pillar-card pillar-col-5" tabindex="0" role="button" aria-expanded="false">
+            <div>
+              <div class="photo-slot pillar-photo-slot">
+                <span class="photo-slot-label">[ PHOTO PENDING — PILLAR 03 ]</span>
+                <picture>
+                  <source type="image/webp" srcset="images/pillar-03-fabrication.webp 640w">
+                  <source type="image/jpeg" srcset="images/pillar-03-fabrication.jpg 640w">
+                  <img src="images/pillar-03-fabrication.jpg"
+                       alt="Red pneumatic compressor and hose beside mason carving stone fountain on site"
+                       loading="lazy"
+                       decoding="async"
+                       onerror="this.style.display='none';">
+                </picture>
+              </div>
+
+              <div class="pillar-header">
+                <span class="pillar-num">03</span>
+                <span class="pillar-toggle">+</span>
+              </div>
+              <h3 class="pillar-title">Practical Skills &amp; Fabrication</h3>
+              <p class="pillar-desc">
+                Carpenters and welders craft architectural furniture from reclaimed eucalyptus and scrap steel.
+              </p>
+            </div>
+            <div class="pillar-detail">
+              Every bench, door, and truss is built on site by apprentices.
+            </div>
+          </article>
+
+          <!-- Pillar 4 (Span 7) -->
+          <article class="pillar-card pillar-col-7" tabindex="0" role="button" aria-expanded="false">
+            <div>
+              <div class="photo-slot pillar-photo-slot">
+                <span class="photo-slot-label">[ PHOTO PENDING — PILLAR 04 ]</span>
+                <picture>
+                  <source type="image/webp" srcset="images/pillar-04-digital.webp 640w">
+                  <source type="image/jpeg" srcset="images/pillar-04-digital.jpg 640w">
+                  <img src="images/pillar-04-digital.jpg"
+                       alt="Parametric curved membrane roof and complex geometric timber lattice framework"
+                       loading="lazy"
+                       decoding="async"
+                       onerror="this.style.display='none';">
+                </picture>
+              </div>
+
+              <div class="pillar-header">
+                <span class="pillar-num">04</span>
+                <span class="pillar-toggle">+</span>
+              </div>
+              <h3 class="pillar-title">Digital Creativity &amp; Technology</h3>
+              <p class="pillar-desc">
+                Students turn physical craft into 3D models, animation, and open-source design blueprints.
+              </p>
+            </div>
+            <div class="pillar-detail">
+              Digital files link local workshops to fabricators across Rwanda, Kenya, and Ghana.
+            </div>
+          </article>
+
+          <!-- Pillar 5 (Span 6) -->
+          <article class="pillar-card pillar-col-6" tabindex="0" role="button" aria-expanded="false">
+            <div>
+              <div class="photo-slot pillar-photo-slot">
+                <span class="photo-slot-label">[ PHOTO PENDING — PILLAR 05 ]</span>
+                <picture>
+                  <source type="image/webp" srcset="images/pillar-05-enterprise.webp 640w">
+                  <source type="image/jpeg" srcset="images/pillar-05-enterprise.jpg 640w">
+                  <img src="images/pillar-05-enterprise.jpg"
+                       alt="Finished architectural water wall installation with layered sandstone tiles and plant"
+                       loading="lazy"
+                       decoding="async"
+                       onerror="this.style.display='none';">
+                </picture>
+              </div>
+
+              <div class="pillar-header">
+                <span class="pillar-num">05</span>
+                <span class="pillar-toggle">+</span>
+              </div>
+              <h3 class="pillar-title">Entrepreneurship &amp; Creative Enterprise</h3>
+              <p class="pillar-desc">
+                Artists learn pricing, copyright registration, and direct export to international collectors.
+              </p>
+            </div>
+            <div class="pillar-detail">
+              Graduates retain full copyright and sell directly through our cooperative gallery.
+            </div>
+          </article>
+
+          <!-- Pillar 6 (Span 6) -->
+          <article class="pillar-card pillar-col-6" tabindex="0" role="button" aria-expanded="false">
+            <div>
+              <div class="photo-slot pillar-photo-slot">
+                <span class="photo-slot-label">[ PHOTO PENDING — PILLAR 06 ]</span>
+                <picture>
+                  <source type="image/webp" srcset="images/pillar-06-heritage.webp 640w">
+                  <source type="image/jpeg" srcset="images/pillar-06-heritage.jpg 640w">
+                  <img src="images/pillar-06-heritage.jpg"
+                       alt="Curved vernacular African thatched pavilion roof and woven timber truss framework"
+                       loading="lazy"
+                       decoding="async"
+                       onerror="this.style.display='none';">
+                </picture>
+              </div>
+
+              <div class="pillar-header">
+                <span class="pillar-num">06</span>
+                <span class="pillar-toggle">+</span>
+              </div>
+              <h3 class="pillar-title">Culture, Heritage &amp; Community Arts</h3>
+              <p class="pillar-desc">
+                Elders teach Imigongo geometry and natural dye preparation to the next generation.
+              </p>
+            </div>
+            <div class="pillar-detail">
+              Workshops preserve Gisaka cow-dung relief techniques alongside contemporary clay firing.
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         SLOT 04: LIVING ECOSYSTEM (3:2 Landscape Wide Shot, 1200×800)
+         ======================================================================= -->
+    <section class="ecosystem-section" id="ecosystem">
+      <div class="container">
+        
+        <div class="section-kicker">Campus Infrastructure</div>
+        <h2 class="section-title">The Living Ecosystem</h2>
+
+        <div class="arch-statement">
+          <p class="arch-statement-text">
+            The architecture itself will demonstrate sustainability — recycled materials, natural light, rainwater harvesting, solar energy.
+          </p>
+        </div>
+
+        <!-- Slot 04: 3:2 Landscape Wide Shot of Workshop / Build -->
+        <div class="photo-slot ecosystem-photo-slot">
+          <span class="photo-slot-label">[ PHOTO PENDING — ECOSYSTEM ]</span>
+          <picture>
+            <source type="image/webp" srcset="images/ecosystem-workshop-build-1200.webp 1200w, images/ecosystem-workshop-build-640.webp 640w" sizes="(max-width: 1200px) 100vw, 1200px">
+            <source type="image/jpeg" srcset="images/ecosystem-workshop-build-1200.jpg 1200w, images/ecosystem-workshop-build-640.jpg 640w" sizes="(max-width: 1200px) 100vw, 1200px">
+            <img src="images/ecosystem-workshop-build-1200.jpg"
+                 alt="Wide view of sweeping organic thatched pavilions and curved canopy across meadow"
+                 loading="lazy"
+                 decoding="async"
+                 onerror="this.style.display='none';">
+          </picture>
+        </div>
+
+        <div class="facilities-scroll" tabindex="0" role="region" aria-label="Campus facilities list">
+          
+          <div class="facility-item">
+            <span class="facility-num">01 / ATELIER</span>
+            <div>
+              <h3 class="facility-name">Creative Studios</h3>
+              <p class="facility-desc">North-facing ateliers for painting, sculpture, and large-format printmaking.</p>
+            </div>
+          </div>
+
+          <div class="facility-item">
+            <span class="facility-num">02 / PROTOTYPING</span>
+            <div>
+              <h3 class="facility-name">Makerspace</h3>
+              <p class="facility-desc">Wood lathes, arc welders, and hand tools running on solar power.</p>
+            </div>
+          </div>
+
+          <div class="facility-item">
+            <span class="facility-num">03 / CIRCULARITY</span>
+            <div>
+              <h3 class="facility-name">Material Recovery Centre</h3>
+              <p class="facility-desc">Sorting bays for municipal plastics, scrap metal, and discarded rubber.</p>
+            </div>
+          </div>
+
+          <div class="facility-item">
+            <span class="facility-num">04 / COMPUTATION</span>
+            <div>
+              <h3 class="facility-name">Digital Lab</h3>
+              <p class="facility-desc">Twelve workstations for 3D modelling, digital drafting, and animation.</p>
+            </div>
+          </div>
+
+          <div class="facility-item">
+            <span class="facility-num">05 / EXHIBITION</span>
+            <div>
+              <h3 class="facility-name">Gallery</h3>
+              <p class="facility-desc">Compressed-earth exhibition hall with natural ventilation and museum-grade daylight.</p>
+            </div>
+          </div>
+
+          <div class="facility-item">
+            <span class="facility-num">06 / COMMERCE</span>
+            <div>
+              <h3 class="facility-name">Creative Market</h3>
+              <p class="facility-desc">Direct-sale stalls for resident artisans to sell to visiting collectors.</p>
+            </div>
+          </div>
+
+          <div class="facility-item">
+            <span class="facility-num">07 / MONUMENT</span>
+            <div>
+              <h3 class="facility-name">Sculpture Garden</h3>
+              <p class="facility-desc">Open-air walking trail featuring monumental works from reclaimed metal.</p>
+            </div>
+          </div>
+
+          <div class="facility-item">
+            <span class="facility-num">08 / GATHERING</span>
+            <div>
+              <h3 class="facility-name">Amphitheatre</h3>
+              <p class="facility-desc">Stepped earth pavilion for poetry, acoustic music, and civic forums.</p>
+            </div>
+          </div>
+
+          <div class="facility-item">
+            <span class="facility-num">09 / CULTIVATION</span>
+            <div>
+              <h3 class="facility-name">Demonstration Garden</h3>
+              <p class="facility-desc">Permaculture beds growing natural indigo, madder, and moringa for dye.</p>
+            </div>
+          </div>
+
+          <div class="facility-item">
+            <span class="facility-num">10 / ARCHIVE</span>
+            <div>
+              <h3 class="facility-name">Learning Centre</h3>
+              <p class="facility-desc">Seminar rooms for business classes, legal workshops, and oral history.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         SOCIAL PROOF / VALIDATION STRIP
+         ======================================================================= -->
+    <section class="proof-section">
+      <div class="container">
+        <div class="proof-grid">
+          
+          <div class="proof-card">
+            <div class="proof-label">Waste-to-Art Benchmark</div>
+            <p class="proof-quote">
+              “Built on the model of <strong>Ocean Sole</strong>: 10,000 flip-flops recycled weekly into art and employment.”
+            </p>
+          </div>
+
+          <div class="proof-card">
+            <div class="proof-label">Architectural Precedent</div>
+            <p class="proof-quote">
+              “Inspired by <strong>Komera Leadership Center</strong>: community infrastructure rooted in Imigongo art and local labor.”
+            </p>
+          </div>
+
+          <div class="proof-card">
+            <div class="proof-label">Urban Precedent</div>
+            <p class="proof-quote">
+              “Rooted in the spirit of the <strong>Accra Arts District</strong>: youth creativity as healing and public expression.”
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         SLOT 05: PRE-CTA ATMOSPHERIC BAND (16:9 Landscape, 1920×1080, 60% Dark)
+         ======================================================================= -->
+    <section class="pre-cta-section" aria-label="Atmospheric studio perspective">
+      <div class="photo-slot pre-cta-slot">
+        <span class="photo-slot-label">[ PHOTO PENDING — PRE-CTA ATMOSPHERE ]</span>
+        <picture>
+          <source type="image/webp" srcset="images/pre-cta-atmospheric-wide-1920.webp 1920w, images/pre-cta-atmospheric-wide-1080.webp 1080w" sizes="100vw">
+          <source type="image/jpeg" srcset="images/pre-cta-atmospheric-wide-1920.jpg 1920w, images/pre-cta-atmospheric-wide-1080.jpg 1080w" sizes="100vw">
+          <img src="images/pre-cta-atmospheric-wide-1920.jpg"
+               alt="Illuminated open-air timber pavilion nestled among lush garden trees at dusk"
+               loading="lazy"
+               decoding="async"
+               onerror="this.style.display='none';">
+        </picture>
+        <div class="pre-cta-dark-overlay" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         THE ASK / FINAL CTA (Poster Scale, Clear Declarative Verbs)
+         ======================================================================= -->
+    <section class="ask-section" id="movement">
+      <div class="container">
+        
+        <h2 class="ask-headline">
+          This is not a building. It is a movement.
+        </h2>
+
+        <p class="ask-subheadline">
+          We are inviting artists, educators, environmentalists, entrepreneurs, and partners to help bring The Art Village to life.
+        </p>
+
+        <div class="ask-actions">
+          <button class="btn-primary" data-open-form>
+            Become Part of the Movement
+          </button>
+          <a href="https://wa.me/254722559327?text=Hello%20Patrick!%20I%20am%20interested%20in%20The%20Art%20Village%20Sustainable%20Creative%20Academy." target="_blank" rel="noopener noreferrer" class="btn-whatsapp">
+            WhatsApp Patrick (+254 722 559327) →
+          </a>
+          <a href="vision-document.html" target="_blank" class="btn-secondary">
+            Vision Document
+          </a>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- =======================================================================
+       SLOT 06: FOOTER (TYPE-ONLY — NO IMAGE)
+       ======================================================================= -->
+  <footer class="site-footer">
+    <div class="container">
+      
+      <div class="footer-layout">
+        <div>
+          <div class="footer-title">The Art Village</div>
+          <div class="footer-motto">Create. Innovate. Transform.</div>
+          <p class="footer-copy">
+            A sustainable creative academy where discarded materials, traditional knowledge, and young imagination become the foundation of a regenerative African economy.
+          </p>
+        </div>
+
+        <div class="footer-contact-col">
+          <div class="footer-contact-title">Direct Inquiries</div>
+          <div class="footer-contact-name">Patrick Kinuthia</div>
+          <div class="footer-contact-role">Founder &amp; Creative Director</div>
+          <ul class="footer-contact-list">
+            <li>
+              <span class="contact-type">WhatsApp</span>
+              <a href="https://wa.me/254722559327?text=Hello%20Patrick!%20I%20am%20interested%20in%20The%20Art%20Village." target="_blank" rel="noopener noreferrer">+254 722 559327</a>
+            </li>
+            <li>
+              <span class="contact-type">Email</span>
+              <a href="mailto:patrickkinuthia712@gmail.com">patrickkinuthia712@gmail.com</a>
+            </li>
+            <li>
+              <span class="contact-type">Instagram</span>
+              <a href="https://www.instagram.com/babaritah/" target="_blank" rel="noopener noreferrer">@babaritah</a>
+            </li>
+            <li>
+              <span class="contact-type">TikTok</span>
+              <a href="https://www.tiktok.com/@patrickkinuthia" target="_blank" rel="noopener noreferrer">@patrickkinuthia</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer-qr-panel">
+          <div class="qr-svg-box" aria-hidden="true">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <rect width="100" height="100" fill="#FFFFFF"/>
+              <!-- Position markers -->
+              <rect x="8" y="8" width="28" height="28" fill="#1A1A1A"/>
+              <rect x="12" y="12" width="20" height="20" fill="#FFFFFF"/>
+              <rect x="16" y="16" width="12" height="12" fill="#C96A4B"/>
+              
+              <rect x="64" y="8" width="28" height="28" fill="#1A1A1A"/>
+              <rect x="68" y="12" width="20" height="20" fill="#FFFFFF"/>
+              <rect x="72" y="16" width="12" height="12" fill="#2E6F6A"/>
+              
+              <rect x="8" y="64" width="28" height="28" fill="#1A1A1A"/>
+              <rect x="12" y="68" width="20" height="20" fill="#FFFFFF"/>
+              <rect x="16" y="72" width="12" height="12" fill="#E3B448"/>
+              
+              <!-- Data modules -->
+              <rect x="42" y="12" width="6" height="6" fill="#1A1A1A"/>
+              <rect x="52" y="12" width="6" height="6" fill="#1A1A1A"/>
+              <rect x="42" y="24" width="6" height="6" fill="#1A1A1A"/>
+              <rect x="12" y="44" width="6" height="6" fill="#1A1A1A"/>
+              <rect x="24" y="44" width="6" height="6" fill="#1A1A1A"/>
+              <rect x="36" y="44" width="6" height="6" fill="#1A1A1A"/>
+              <rect x="48" y="44" width="6" height="6" fill="#1A1A1A"/>
+              <rect x="60" y="44" width="6" height="6" fill="#1A1A1A"/>
+              <rect x="72" y="44" width="6" height="6" fill="#1A1A1A"/>
+              <rect x="44" y="60" width="6" height="6" fill="#1A1A1A"/>
+              <rect x="56" y="60" width="6" height="6" fill="#1A1A1A"/>
+              <rect x="44" y="72" width="6" height="6" fill="#1A1A1A"/>
+              <rect x="60" y="72" width="6" height="6" fill="#1A1A1A"/>
+              <rect x="76" y="72" width="6" height="6" fill="#1A1A1A"/>
+            </svg>
+          </div>
+          <div>
+            <div class="qr-note-title">Share Showcase Link</div>
+            <div class="qr-note-desc">Scan or copy to share this page.</div>
+            <button class="share-link-btn" id="sharePageBtn">Copy Link</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-links">
+          <a href="https://wa.me/254722559327?text=Hello%20Patrick!%20I%20am%20interested%20in%20The%20Art%20Village." target="_blank" rel="noopener noreferrer">WhatsApp (+254 722 559327)</a>
+          <a href="mailto:patrickkinuthia712@gmail.com">Email</a>
+          <a href="https://www.instagram.com/babaritah/" target="_blank" rel="noopener noreferrer">Instagram (@babaritah)</a>
+          <a href="https://www.tiktok.com/@patrickkinuthia" target="_blank" rel="noopener noreferrer">TikTok (@patrickkinuthia)</a>
+        </div>
+        <div class="footer-tag">
+          The Art Village © 2026 · Flat Architecture · Under 30KB
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- =======================================================================
+       SLIM STICKY MOBILE ACTION BAR
+       ======================================================================= -->
+  <aside class="mobile-bar" id="mobileStickyBar" aria-label="Mobile quick action">
+    <button class="mobile-bar-btn" data-open-form>
+      Become Part of the Movement
+    </button>
+  </aside>
+
+  <!-- =======================================================================
+       REGISTRATION DRAWER / MODAL
+       ======================================================================= -->
+  <div class="modal-overlay" id="registrationModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-sheet">
+      <button class="modal-close" id="closeModalBtn" aria-label="Close dialog">×</button>
+      
+      <div id="modalFormView">
+        <div class="modal-kicker">Showcase Registration</div>
+        <h2 class="modal-heading">Become Part of the Movement</h2>
+
+        <form class="form-stack" id="leadForm">
+          <div class="field-group">
+            <label class="field-label" for="userName">Your name *</label>
+            <input class="field-input" type="text" id="userName" required placeholder="Amina Mensah">
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="userEmail">Your email *</label>
+            <input class="field-input" type="email" id="userEmail" required placeholder="amina@domain.africa">
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="userPhone">Your phone or WhatsApp</label>
+            <input class="field-input" type="tel" id="userPhone" placeholder="+250 788 000 000">
+          </div>
+
+          <div class="field-group">
+            <label class="field-label">I want to:</label>
+            <div class="options-row">
+              <label class="option-pill">
+                <input type="radio" name="userRole" value="Partner" checked>
+                <span>Partner</span>
+              </label>
+              <label class="option-pill">
+                <input type="radio" name="userRole" value="Volunteer">
+                <span>Volunteer</span>
+              </label>
+              <label class="option-pill">
+                <input type="radio" name="userRole" value="Enroll">
+                <span>Enroll</span>
+              </label>
+              <label class="option-pill">
+                <input type="radio" name="userRole" value="Fund">
+                <span>Fund</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="userNote">Note (optional)</label>
+            <textarea class="field-textarea" id="userNote" placeholder="Tell us how you would like to collaborate..."></textarea>
+          </div>
+
+          <button type="submit" class="btn-primary" style="width: 100%; margin-top: 0.5rem;">
+            Submit Registration
+          </button>
+        </form>
+      </div>
+
+      <!-- Success Confirmation -->
+      <div class="modal-confirmed" id="modalSuccessView">
+        <div class="pass-card">
+          <div class="pass-id" id="passNumber">TAV-2026-0000</div>
+          <div class="pass-name" id="passHolder">Amina Mensah</div>
+          <div class="pass-role" id="passRole">Partner</div>
+          <p class="pass-manifesto">
+            “Nothing is wasted when imagination is given the opportunity to create.”
+          </p>
+        </div>
+        <button class="btn-secondary" id="finishModalBtn" style="width: 100%;">
+          Close
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Minimalist Script (Pillars Tap-to-Expand, Slim Sticky Bar, Modal, Copy Link) -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Pillars Tap-to-Expand
+      const pillarCards = document.querySelectorAll('.pillar-card');
+      pillarCards.forEach(card => {
+        card.addEventListener('click', (e) => {
+          // If click was inside the photo slot, still expand
+          const isExpanded = card.getAttribute('aria-expanded') === 'true';
+          card.setAttribute('aria-expanded', !isExpanded);
+        });
+        card.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            card.click();
+          }
+        });
+      });
+
+      // 2. Slim Sticky Mobile Bar
+      const mobileBar = document.getElementById('mobileStickyBar');
+      const hero = document.getElementById('hero');
+      if (mobileBar && hero) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) {
+              mobileBar.classList.add('active');
+            } else {
+              mobileBar.classList.remove('active');
+            }
+          });
+        }, { threshold: 0.1 });
+        observer.observe(hero);
+      }
+
+      // 3. Registration Modal
+      const modal = document.getElementById('registrationModal');
+      const openBtns = document.querySelectorAll('[data-open-form]');
+      const closeBtn = document.getElementById('closeModalBtn');
+      const finishBtn = document.getElementById('finishModalBtn');
+      const form = document.getElementById('leadForm');
+      const formView = document.getElementById('modalFormView');
+      const successView = document.getElementById('modalSuccessView');
+
+      const openModal = () => {
+        if (!modal) return;
+        modal.classList.add('active');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      };
+
+      const closeModal = () => {
+        if (!modal) return;
+        modal.classList.remove('active');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      };
+
+      openBtns.forEach(btn => btn.addEventListener('click', openModal));
+      if (closeBtn) closeBtn.addEventListener('click', closeModal);
+      if (finishBtn) finishBtn.addEventListener('click', closeModal);
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+      });
+
+      if (form) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const name = document.getElementById('userName').value.trim();
+          const email = document.getElementById('userEmail').value.trim();
+          const selectedRole = form.querySelector('input[name="userRole"]:checked')?.value || 'Partner';
+
+          if (!name || !email) return;
+
+          const randomId = Math.floor(1000 + Math.random() * 9000);
+          document.getElementById('passNumber').textContent = `TAV-2026-${randomId}`;
+          document.getElementById('passHolder').textContent = name;
+          document.getElementById('passRole').textContent = selectedRole;
+
+          formView.style.display = 'none';
+          successView.classList.add('active');
+        });
+      }
+
+      // 4. Share Link Button
+      const shareBtn = document.getElementById('sharePageBtn');
+      if (shareBtn) {
+        shareBtn.addEventListener('click', () => {
+          const url = window.location.href.split('#')[0];
+          if (navigator.clipboard) {
+            navigator.clipboard.writeText(url).then(() => {
+              shareBtn.textContent = 'Copied!';
+              setTimeout(() => { shareBtn.textContent = 'Copy Link'; }, 2000);
+            });
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

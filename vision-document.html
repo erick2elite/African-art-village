@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Art Village | Full Vision Document & Concept Note</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --base: #1A1A1A;
+      --surface: #242424;
+      --terracotta: #C96A4B;
+      --teal: #2E6F6A;
+      --gold: #E3B448;
+      --offwhite: #F5F0E8;
+      --muted: #A8A29E;
+      --charcoal-light: #3A3A3A;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--offwhite);
+      color: var(--base);
+      font-family: 'Fraunces', serif;
+      line-height: 1.65;
+      padding: 2rem 1rem;
+    }
+    .paper {
+      max-width: 820px;
+      margin: 0 auto;
+      background: #FFFFFF;
+      padding: 3.5rem 2.5rem;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+      border-top: 8px solid var(--terracotta);
+    }
+    @media (max-width: 600px) {
+      .paper { padding: 2rem 1.25rem; }
+    }
+    .header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-bottom: 2px solid var(--base);
+      padding-bottom: 1.5rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .brand-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--base);
+    }
+    .meta-tag {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--terracotta);
+      font-weight: 600;
+    }
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.2rem;
+      line-height: 1.15;
+      margin-bottom: 0.75rem;
+      color: var(--base);
+    }
+    .subtitle {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.15rem;
+      color: var(--teal);
+      margin-bottom: 2rem;
+      font-weight: 500;
+    }
+    .manifesto-box {
+      background: #F9F6F0;
+      border-left: 4px solid var(--gold);
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 2.5rem;
+      font-size: 1.25rem;
+      font-style: italic;
+      color: var(--base);
+    }
+    h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.35rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--terracotta);
+      border-bottom: 1px solid #E5DEC9;
+      padding-bottom: 0.5rem;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    p {
+      margin-bottom: 1.2rem;
+      font-size: 1.05rem;
+      color: #333333;
+    }
+    .pillar-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .pillar-item {
+      padding: 1rem 1.25rem;
+      background: #FAF8F5;
+      border-left: 3px solid var(--teal);
+    }
+    .pillar-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--base);
+      margin-bottom: 0.25rem;
+    }
+    .facilities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0.75rem;
+      margin: 1.5rem 0;
+    }
+    .facility-badge {
+      background: #F0ECE1;
+      padding: 0.75rem 1rem;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--base);
+      border-radius: 4px;
+    }
+    .callout-quote {
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--terracotta);
+      line-height: 1.35;
+    }
+    .actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 2px solid var(--base);
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.85rem 1.75rem;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+    }
+    .btn-primary {
+      background: var(--base);
+      color: var(--offwhite);
+    }
+    .btn-secondary {
+      background: var(--terracotta);
+      color: #FFFFFF;
+    }
+    @media print {
+      body { background: #FFFFFF; padding: 0; }
+      .paper { box-shadow: none; border-top: none; padding: 0; }
+      .actions { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="paper">
+    <div class="header-bar">
+      <div class="brand-title">THE ART VILLAGE</div>
+      <div class="meta-tag">Concept Blueprint & Artist Note • 2026</div>
+    </div>
+
+    <h1>A Sustainable Creative Academy</h1>
+    <div class="subtitle">Where Creativity Meets Sustainability & Young People Become Architects of Change</div>
+
+    <div class="manifesto-box">
+      “Nothing is wasted when imagination is given the opportunity to create.”
+    </div>
+
+    <h2>1. Executive Synthesis</h2>
+    <p>
+      The Art Village is an operational answer to two intersecting African imperatives: the surging generation of creative youth seeking economic sovereignty, and the critical challenge of environmental waste. 
+    </p>
+    <p>
+      Inspired by groundbreaking institutions including the <strong>Komera Leadership Center</strong> (Rwanda), <strong>Ocean Sole</strong> (Kenya), and the grassroots energy of the <strong>Accra Arts District</strong> (Ghana), The Art Village creates a physical and intellectual sanctuary where discarded materials, indigenous heritage, and modern digital craft converge.
+    </p>
+
+    <h2>2. The Core Philosophy</h2>
+    <p>
+      Discarded materials, traditional knowledge, and young imagination are the raw materials of a new circular economy. Rather than treating waste as municipal baggage or creative expression as a luxury, we treat both as foundational building blocks for job creation, civic regeneration, and public healing.
+    </p>
+
+    <h2>3. The Six Educational & Production Pillars</h2>
+    <div class="pillar-list">
+      <div class="pillar-item">
+        <div class="pillar-name">01. Fine Arts & Creative Expression</div>
+        Painting, sculpture, photography, and music rooted in local storytelling and exhibited on global stages.
+      </div>
+      <div class="pillar-item">
+        <div class="pillar-name">02. Recycling & Environmental Art</div>
+        Industrial and ocean waste transformation, turning marine debris and discarded metals into high-value cultural artifacts.
+      </div>
+      <div class="pillar-item">
+        <div class="pillar-name">03. Practical Skills & Fabrication</div>
+        Woodwork, metal casting, textile engineering, and sustainable furniture design utilizing salvaged timber and composite materials.
+      </div>
+      <div class="pillar-item">
+        <div class="pillar-name">04. Digital Creativity & Technology</div>
+        Bridging heritage craftsmanship with 3D modeling, interactive media, animation, and generative environmental design.
+      </div>
+      <div class="pillar-item">
+        <div class="pillar-name">05. Entrepreneurship & Creative Enterprise</div>
+        Direct market linkage, portfolio development, intellectual property ownership, and micro-venture incubation.
+      </div>
+      <div class="pillar-item">
+        <div class="pillar-name">06. Culture, Heritage & Community Arts</div>
+        Intergenerational apprenticeships honoring indigenous methodologies (including Imigongo art and Adinkra symbology).
+      </div>
+    </div>
+
+    <h2>4. The Living Ecosystem — 10 Sustainable Facilities</h2>
+    <div class="facilities-grid">
+      <div class="facility-badge">1. Creative Studios</div>
+      <div class="facility-badge">2. Rapid Makerspace</div>
+      <div class="facility-badge">3. Material Recovery Hub</div>
+      <div class="facility-badge">4. Digital Lab & Media Suite</div>
+      <div class="facility-badge">5. Public Rammed-Earth Gallery</div>
+      <div class="facility-badge">6. Artisan Creative Market</div>
+      <div class="facility-badge">7. Monumental Sculpture Garden</div>
+      <div class="facility-badge">8. Earthen Amphitheatre</div>
+      <div class="facility-badge">9. Demonstration Permaculture Garden</div>
+      <div class="facility-badge">10. Intergenerational Learning Centre</div>
+    </div>
+    <p style="font-size: 0.95rem; color: #555; margin-top: 0.5rem;">
+      <em>Architecture Note:</em> Constructed exclusively using compressed earth blocks, woven eucalyptus shading screens, recycled aggregate, rainwater cisterns, and 100% off-grid solar arrays.
+    </p>
+
+    <div class="callout-quote">
+      “This is not a building. It is a movement.”
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-primary" onclick="window.print()">Print / Save as PDF</button>
+      <a class="btn btn-secondary" href="index.html">Return to Live Landing Page</a>
+    </div>
+  </div>
+</body>
+</html>
